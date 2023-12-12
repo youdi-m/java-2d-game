@@ -26,7 +26,7 @@ public class TileManager {
 		this.gp = gp;
 		
 		tile = new Tile[10];
-		mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 		
 		getTileImage();
 		loadMap("/maps/map01.txt");
@@ -49,6 +49,18 @@ public class TileManager {
 			tile[2] = new Tile();
 			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
 			
+			//earth tile
+			tile[3] = new Tile();
+			tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/earth.png"));
+			
+			//sand tile
+			tile[4] = new Tile();
+			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/sand.png"));
+			
+			//tree tile
+			tile[5] = new Tile();
+			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
+			
 		}catch(IOException e) {
 			
 			e.printStackTrace();
@@ -68,12 +80,12 @@ public class TileManager {
 			int col = 0;
 			int row = 0;
 			
-			while(col < gp.maxScreenCol && row < gp.maxScreenRow) {
+			while(col < gp.maxWorldCol && row < gp.maxWorldRow) {
 				
 				//read 1 line from text file
 				String line = br.readLine();
 				
-				while(col < gp.maxScreenCol) {
+				while(col < gp.maxWorldCol) {
 					
 					//splitting numbers using a space to get data (0 = grass, 1 = wall, etc...)
 					String numbers[] = line.split(" ");
@@ -87,7 +99,7 @@ public class TileManager {
 				
 				//once we have drawn an entire horizontal line
 				//we reset and draw the next one under it
-				if(col == gp.maxScreenCol) {
+				if(col == gp.maxWorldCol) {
 					
 					col = 0;
 					row++;
@@ -104,25 +116,37 @@ public class TileManager {
 	//g2.drawImage(tile, x location, y location, image width, image height, image observer(null))
 	public void draw(Graphics2D g2) {
 		
-		int col = 0;
-		int row = 0;
-		int x = 0;
-		int y = 0;
+		int worldCol = 0;
+		int worldRow = 0;
 		
-		while(col < gp.maxScreenCol && row < gp.maxScreenRow) {
+		while(worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 			
-			int tileNum = mapTileNum[col][row];
+			int tileNum = mapTileNum[worldCol][worldRow];
 			
-			g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
-			col++;
-			x += gp.tileSize;
+			//getting tile world positions
+			int worldX = worldCol * gp.tileSize;
+			int worldY = worldRow * gp.tileSize;
 			
-			if(col == gp.maxScreenCol) {
+			//using player location relative to world x.y locations to know where to draw each tile on screen then we offset player difference
+			int screenX = worldX - gp.player.worldX + gp.player.screenX;
+			int screenY = worldY - gp.player.worldY + gp.player.screenY;
+			
+			//this huge if statement checks if the tile is within our screen's view.
+			//if it is, we draw the tile on the screen.
+			//basically, we are asking our computer to only draw what WE can actually see.
+			//this helps with performance
+			if(worldX + gp.tileSize> gp.player.worldX - gp.player.screenX &&
+			   worldX - gp.tileSize< gp.player.worldX + gp.player.screenX &&
+			   worldY + gp.tileSize> gp.player.worldY - gp.player.screenY &&
+			   worldY - gp.tileSize< gp.player.worldY + gp.player.screenY) {
+				g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+			}
+			worldCol++;
+			
+			if(worldCol == gp.maxWorldCol) {
 				
-				col = 0;
-				x = 0;
-				row++;
-				y += gp.tileSize;
+				worldCol = 0;
+				worldRow++;
 			}
 		}
 	}
