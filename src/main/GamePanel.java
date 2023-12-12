@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import entity.Player;
+import object.SuperObject;
 import tile.Tile;
 import tile.TileManager;
 
@@ -37,6 +38,8 @@ public class GamePanel extends JPanel implements Runnable{
 	TileManager tileM = new TileManager(this);
 	public Player player = new Player(this, keyH);
 	public CollisionHandler cHandler = new CollisionHandler(this);
+	public AssetHandler aHandler = new AssetHandler(this);
+	public SuperObject obj[] = new SuperObject[10];
 	
 	public GamePanel() {
 		
@@ -45,6 +48,11 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setDoubleBuffered(true);
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
+	}
+	
+	public void setupGame() {
+		
+		aHandler.setObject();
 	}
 
 	public void startGameThread() {
@@ -83,6 +91,7 @@ public class GamePanel extends JPanel implements Runnable{
 		player.update();
 	}
 	
+	//calling draw functions here works like layers. draw the world first, then objects and players
 	public void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);
@@ -90,6 +99,16 @@ public class GamePanel extends JPanel implements Runnable{
 		Graphics2D g2 = (Graphics2D)g;
 		
 		tileM.draw(g2);
+		
+		//for objects, we scan the obj array, if somethings there we draw it
+		for(int i=0; i < obj.length; i++) {
+			if(obj[i] != null) {
+				
+				obj[i].draw(g2, this);
+			}
+			
+		}
+		
 		player.draw(g2);
 		
 		g2.dispose();

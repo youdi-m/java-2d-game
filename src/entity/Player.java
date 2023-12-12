@@ -116,7 +116,6 @@ public class Player extends Entity{
 		
 	}
 	
-	
 	//drawing player sprite on screen
 	public void draw(Graphics2D g2) {
 		
