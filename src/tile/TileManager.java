@@ -15,10 +15,10 @@ public class TileManager {
 	GamePanel gp;
 	
 	//array to store tile info, size of array is amount of tiles, this can be changed to introduce more tiles
-	Tile[] tile;
+	public Tile[] tile;
 	
 	//2D array to store map data
-	int mapTileNum[][];
+	public int mapTileNum[][];
 	
 	//tileManager construct
 	public TileManager(GamePanel gp) {
@@ -44,10 +44,12 @@ public class TileManager {
 			//wall tile
 			tile[1] = new Tile();
 			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
+			tile[1].collision = true;
 			
 			//water tile
 			tile[2] = new Tile();
 			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
+			tile[2].collision = true;
 			
 			//earth tile
 			tile[3] = new Tile();
@@ -60,6 +62,7 @@ public class TileManager {
 			//tree tile
 			tile[5] = new Tile();
 			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
+			tile[5].collision = true;
 			
 		}catch(IOException e) {
 			
