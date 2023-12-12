@@ -1,9 +1,8 @@
 package entity;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImagingOpException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -46,6 +45,7 @@ public class Player extends Entity{
 			right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
 			right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
 		}catch(IOException e) {
+			
 			e.printStackTrace();
 		}
 	}
