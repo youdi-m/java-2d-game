@@ -19,6 +19,7 @@ public class Player extends Entity{
 	//these indicate where we DRAW the player
 	public final int screenX;
 	public final int screenY;
+	int numOfKeys = 0;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
@@ -32,6 +33,8 @@ public class Player extends Entity{
 		solidArea = new Rectangle();
 		solidArea.x = 8;
 		solidArea.y = 16;
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
 		solidArea.width = 32;
 		solidArea.height = 32;
 		
@@ -88,6 +91,10 @@ public class Player extends Entity{
 			collisionOn = false;
 			gp.cHandler.checkTile(this);
 			
+			//check object collision
+			int objIndex = gp.cHandler.checkObject(this, true);
+			pickUpObject(objIndex);
+			
 			//if collision is false, player can move
 			if(collisionOn == false) {
 				
@@ -114,6 +121,40 @@ public class Player extends Entity{
 			}
 		}
 		
+	}
+	
+	//setting interactions with each item
+	public void pickUpObject(int i) {
+		
+		if(i != 999) {
+			
+			String objectNameString = gp.obj[i].name;
+			
+			switch(objectNameString) {
+			
+			case "Key":
+				
+				numOfKeys++;
+				gp.obj[i] = null;
+				break;
+			case "Door":
+				
+				if(numOfKeys > 0) {
+					
+					numOfKeys--;
+					gp.obj[i] = null;
+				}
+				break;
+			case "Chest":
+				
+				if(numOfKeys > 0) {
+					
+					numOfKeys--;
+					gp.obj[i] = null;
+				}
+				break;
+			}
+		}
 	}
 	
 	//drawing player sprite on screen

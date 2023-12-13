@@ -18,6 +18,8 @@ public class Door_Object extends SuperObject{
 			
 			e.printStackTrace();
 		}
+		
+		collision = true;
 	}
 
 }
