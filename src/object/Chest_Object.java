@@ -8,7 +8,6 @@ public class Chest_Object extends SuperObject{
 	
 	public Chest_Object() {
 		
-		
 		name = "Chest";
 		
 		try {

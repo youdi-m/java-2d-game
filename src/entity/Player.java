@@ -134,6 +134,7 @@ public class Player extends Entity{
 			
 			case "Key":
 				
+				gp.playSE(1);
 				numOfKeys++;
 				gp.obj[i] = null;
 				break;
@@ -141,6 +142,7 @@ public class Player extends Entity{
 				
 				if(numOfKeys > 0) {
 					
+					gp.playSE(4);
 					numOfKeys--;
 					gp.obj[i] = null;
 				}
@@ -149,9 +151,16 @@ public class Player extends Entity{
 				
 				if(numOfKeys > 0) {
 					
+					gp.playSE(4);
 					numOfKeys--;
 					gp.obj[i] = null;
 				}
+				break;
+			case "Boots":
+				
+				gp.playSE(3);
+				speed = 6;
+				gp.obj[i] = null;
 				break;
 			}
 		}

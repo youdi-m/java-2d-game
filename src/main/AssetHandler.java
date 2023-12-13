@@ -1,5 +1,6 @@
 package main;
 
+import object.Boots_Object;
 import object.Chest_Object;
 import object.Door_Object;
 import object.Key_Object;
@@ -31,5 +32,9 @@ public class AssetHandler {
 		gp.obj[3] = new Chest_Object();
 		gp.obj[3].worldX = 33 * gp.tileSize;
 		gp.obj[3].worldY = 44 * gp.tileSize;
+		
+		gp.obj[4] = new Boots_Object();
+		gp.obj[4].worldX = 27 * gp.tileSize;
+		gp.obj[4].worldY = 27 * gp.tileSize;
 	}
 }
