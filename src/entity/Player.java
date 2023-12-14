@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UI;
 
 public class Player extends Entity{
 
@@ -19,7 +20,7 @@ public class Player extends Entity{
 	//these indicate where we DRAW the player
 	public final int screenX;
 	public final int screenY;
-	int numOfKeys = 0;
+	public int numOfKeys = 0;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		
@@ -137,6 +138,7 @@ public class Player extends Entity{
 				gp.playSE(1);
 				numOfKeys++;
 				gp.obj[i] = null;
+				gp.ui.showMessage("Key +1");
 				break;
 			case "Door":
 				
@@ -145,22 +147,27 @@ public class Player extends Entity{
 					gp.playSE(4);
 					numOfKeys--;
 					gp.obj[i] = null;
+					gp.ui.showMessage("Door Unlocked");
 				}
 				break;
 			case "Chest":
 				
 				if(numOfKeys > 0) {
 					
-					gp.playSE(4);
+					gp.ui.gameFinished = true;
+					gp.stopMusic();
+					gp.playSE(2);
 					numOfKeys--;
 					gp.obj[i] = null;
+					gp.ui.showMessage("Chest Unlocked");
 				}
 				break;
 			case "Boots":
-				
+
 				gp.playSE(3);
 				speed = 6;
 				gp.obj[i] = null;
+				gp.ui.showMessage("Boots Aquired");
 				break;
 			}
 		}
