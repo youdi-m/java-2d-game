@@ -3,14 +3,18 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+//function to check user input
 public class KeyHandler implements KeyListener{
 
 	public boolean upPressed, downPressed, leftPressed, rightPressed;
 	
+	//function that must be included in keyhandler class
+	//we dont need it so we leave it blank
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
 
+	//function for key pressed
 	@Override
 	public void keyPressed(KeyEvent e) {
 
@@ -30,6 +34,7 @@ public class KeyHandler implements KeyListener{
 		}
 	}
 
+	//function for key released
 	@Override
 	public void keyReleased(KeyEvent e) {
 		

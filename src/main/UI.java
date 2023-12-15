@@ -9,6 +9,7 @@ import object.Key_Object;
 
 public class UI {
 
+	//variables
 	GamePanel gp;
 	Font arial_40;
 	BufferedImage keyImage;
@@ -17,6 +18,7 @@ public class UI {
 	int messageCounter = 0;
 	public boolean gameFinished = false;
 	
+	//UI construct
 	public UI(GamePanel gp) {
 		
 		this.gp = gp;
@@ -26,16 +28,19 @@ public class UI {
 	    keyImage = key.image;
 	}
 	
+	//function to show temporary messages
 	public void showMessage(String text) {
 		
 		message = text;
 		messageOn = true;
 	}
 	
+	//function to draw the text/images
 	public void draw(Graphics2D g2) {
 		
 		g2.setFont(arial_40);
 		
+		//checks if game is complete
 		if(gameFinished == true) {
 			
 			g2.setColor(Color.yellow);

@@ -70,6 +70,7 @@ public class TileManager {
 		}
 	}
 	
+	//function to load map from text file
 	public void loadMap(String filePath) {
 		
 		try {

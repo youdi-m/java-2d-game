@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Player player = new Player(this, keyH);
 	public SuperObject obj[] = new SuperObject[10];
 	
-	
+	//GamePanel construct
 	public GamePanel() {
 		
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -54,12 +54,14 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setFocusable(true);
 	}
 	
+	//function to set objects in the world and starting music
 	public void setupGame() {
 		
 		aHandler.setObject();
 		playMusic(0);
 	}
 
+	//function to start game thread
 	public void startGameThread() {
 		
 		gameThread = new Thread(this);
@@ -123,18 +125,23 @@ public class GamePanel extends JPanel implements Runnable{
 		g2.dispose();
 	}
 	
+	//function to play background music
 	public void playMusic(int i) {
 		
 		music.setFile(i);
 		music.play();
+		//we are looping the music
 		music.loop();
 	}
 	
+	//function to stop background music
 	public void stopMusic() {
 		
 		music.stop();
 	}
 	
+	//function to play sound effects (different object than music object
+	//so we can play more than one sound at once(pick up sound and bg music))
 	public void playSE(int i) {
 		
 		soundEffects.setFile(i);

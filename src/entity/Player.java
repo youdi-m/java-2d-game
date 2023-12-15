@@ -1,6 +1,5 @@
 package entity;
 
-//import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -10,7 +9,6 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
-import main.UI;
 
 public class Player extends Entity{
 
@@ -27,6 +25,7 @@ public class Player extends Entity{
 		this.gp = gp;
 		this.keyH = keyH;
 		
+		//setting players position relative to the screen
 		screenX = gp.screenWidth/2 - (gp.tileSize/2);
 		screenY = gp.screenHeight/2 - (gp.tileSize/2);
 		
@@ -36,13 +35,15 @@ public class Player extends Entity{
 		solidArea.y = 16;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		solidArea.width = 32;
-		solidArea.height = 32;
+		solidArea.width = 24;
+		solidArea.height = 24;
 		
+		//calling functions to set player values and sprites
 		setDefaultValues();
 		getPlayerImage();
 	}
 	
+	//function to set player starting direction and position
 	public void setDefaultValues() {
 		
 		worldX = gp.tileSize * 25;
@@ -51,6 +52,7 @@ public class Player extends Entity{
 		direction = "down";
 	}
 	
+	//function to load player sprites
 	public void getPlayerImage() {
 		
 		try {
@@ -69,6 +71,7 @@ public class Player extends Entity{
 		}
 	}
 	
+	//function to get user input and detect player collision
 	public void update() {
 		
 		//checking if a button is being pressed then setting player direction

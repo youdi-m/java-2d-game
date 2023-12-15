@@ -7,10 +7,12 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class Sound {
-
+	
+	//variables to store .wav files
 	Clip clip;
 	URL soundURL[] = new URL[30];
 	
+	//grabbing sound files
 	public Sound() {
 		
 		soundURL[0] = getClass().getResource("/sound/BlueBoyAdventure.wav");
@@ -20,6 +22,7 @@ public class Sound {
 		soundURL[4] = getClass().getResource("/sound/unlock.wav");
 	}
 	
+	//setting sound files
 	public void setFile(int i) {
 		
 		try {
@@ -33,16 +36,19 @@ public class Sound {
 		}
 	}
 	
+	//function to play sound clip
 	public void play() {
 		
 		clip.start();
 	}
 	
+	//function to loop a clip (like bg music)
 	public void loop() {
 		
 		clip.loop(clip.LOOP_CONTINUOUSLY);
 	}
 	
+	//function to stop clip
 	public void stop() {
 		
 		clip.stop();

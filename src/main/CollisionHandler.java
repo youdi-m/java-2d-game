@@ -6,11 +6,13 @@ public class CollisionHandler {
 
 	GamePanel gp;
 	
+	//collision handler construct
 	public CollisionHandler (GamePanel gp) {
 		
 		this.gp = gp;
 	}
 	
+	//function to set player collision box
 	public void checkTile(Entity entity) {
 		
 		//these variables are used to check where the entity's collision box is
@@ -26,6 +28,7 @@ public class CollisionHandler {
 		
 		int tileNum1, tileNum2;
 		
+		//checking which direction the player is colliding
 		switch (entity.direction) {
 		
 		case "up":
@@ -81,12 +84,14 @@ public class CollisionHandler {
 		}		
 	}
 	
+	//function to check what object were colliding with
 	public int checkObject(Entity entity, boolean player) {
 		
 		int index = 999;
 		
 		for(int i=0; i < gp.obj.length; i++) {
 			
+			//checking if what were colliding with is actually an object
 			if(gp.obj[i] != null) {
 				
 				//get entity's solid area position
@@ -97,6 +102,7 @@ public class CollisionHandler {
 				gp.obj[i].solidArea.x = gp.obj[i].worldX + gp.obj[i].solidArea.x;
 				gp.obj[i].solidArea.y = gp.obj[i].worldY + gp.obj[i].solidArea.y;
 				
+				//checking where we are in relation to what were colliding with
 				switch(entity.direction) {
 				
 				case "up":
